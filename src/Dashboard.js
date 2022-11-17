@@ -24,7 +24,7 @@ const Dashboard = () => {
 {/*            <Text typing={1} style={styles.text}>
                 Welcome, {name.firstName} {name.lastName}
     </Text> */}
-            <Text>Welcome {name.firstName} {name.lastName} </Text>
+            <Text>Welcome {name.firstName}{name.lastName} </Text>
             <TouchableOpacity onPress={() => firebase.auth().signOut()}>
                 <Text style={{fontSize:22, fontWeight:'bold'}}>Sign Out</Text>
             </TouchableOpacity>

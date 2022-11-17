@@ -165,6 +165,7 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         margin: 10,
     },
+    
     ImageStyle: {
         padding: 10,
         margin: 5,
