@@ -1,4 +1,4 @@
-import { Alert, StyleSheet, Text, View, TouchableOpacity, TextInput, Image, KeyboardAvoidingView, Keyboard } from 'react-native'
+import { Alert, StyleSheet, Text, View, TouchableOpacity, TextInput, Image, KeyboardAvoidingView, Keyboard, SafeAreaView } from 'react-native'
 import React, {useState} from 'react'
 import {firebase} from '../FirebaseConfig'
 
@@ -40,12 +40,13 @@ const Registration = () => {
   }
 
   return (
-    <KeyboardAvoidingView style={styles.container}> 
-
+    <KeyboardAvoidingView 
+    style={styles.container}
+    behavior={Platform.OS === "ios" ? "padding" : "height"}
+    > 
         <View style={styles.stretch1}>  
           <Image style={styles.stretch2} source={require('../assets/LoginImages/QuizAppLogo.png')} />
         </View> 
-
         <Text style={{fontWeight:'bold', fontSize:23, paddingTop: 5, paddingBottom: 10}}>
             Enter Your Information To Register
         </Text>    
@@ -95,7 +96,6 @@ const Registration = () => {
                 secureTextEntry={false}
              />             
             </View>
-
             <View style={styles.SectionStyle}>
             <Image
                 source={require('../assets/RegistrationImages/IconPassword.png')} 

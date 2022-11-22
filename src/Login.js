@@ -6,18 +6,72 @@ import Registration from './Registration'
 import { AiTwoToneMail } from "react-icons/ai";
 import TypeWriter from 'react-native-typewriter';
 
+import Dashboard from './Dashboard';
+import AdminDashboard from './AdminDashboard';
+
 
 const Login = () => {
     const navigation = useNavigation()
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('') 
 
+/*    const [emailError, setEmailError] = useState('')
+    const [passwordError, setPasswordError] = useState('')
+
+    // validate error messages
+    const validate = () => {
+        if (!email.includes('@')) {
+            setEmailError('Invalid Email')
+        }
+
+        else if (password.length < 6) {
+            setPasswordError('Password Must Be At Least 6 Characters')
+        }
+
+        else if (email.length === 0 ) {
+            setEmailError('Email Is Required')
+        }
+
+        else if (email.indexOf(' ') >= 0) {
+            setEmailError('Email Cannot Contain Spaces')
+        }
+
+        else if (password.indexOf(' ') >= 0) {
+            setPasswordError('Password Cannot Contain Spaces')
+        }
+        
+        else {
+            setEmailError('');
+            setPasswordError('');
+        }
+    }
+*/    
+
     loginUser = async(email, password) => {
+        //const checkIfUserOrAdmin = firebase.firestore().collection('users2')
         try {
             await firebase.auth().signInWithEmailAndPassword(email, password)
+            .then((firebase.firestore().collection('users2')).where("role", "==", "student"))
+            if ("role" === "student") {
+                navigation.navigate("dashboard");
+                console.log("User has entered");
+            } else {
+                navigation.navigate("admindashboard");
+                console.log("admin has entered");
+            }
         } catch (error) {
             alert(error.message)
         }
+/*        
+        checkIfUserOrAdmin.where("role", "==", (user?.role === "student"))
+        if (checkIfUserOrAdmin) {
+        navigation.navigate('dashboard')
+      } else {
+        navigation.navigate('admindashboard')
+      }
+*/      
+
+        // code for role goes here + navigation
     }
 
     return (

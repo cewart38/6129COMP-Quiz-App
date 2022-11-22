@@ -3,7 +3,8 @@ import React, { useState } from 'react'
 import {firebase} from '../FirebaseConfig'
 
 
-const Quiz = () => {
+
+const QuizSFJ = () => {
 
     question: string;
     answers: string[answer];
@@ -42,6 +43,6 @@ const fetchQuizQuestions = async () => {
 } */
 
 
-export default Quiz
+export default QuizSFJ
 
 const styles = StyleSheet.create({})
