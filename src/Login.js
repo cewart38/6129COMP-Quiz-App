@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigation } from '@react-navigation/native'
 import { firebase } from '../FirebaseConfig'
 import { StyleSheet, Text, View, TouchableOpacity, TextInput, Image  } from 'react-native'
@@ -6,12 +6,13 @@ import Registration from './Registration'
 import { AiTwoToneMail } from "react-icons/ai";
 import TypeWriter from 'react-native-typewriter';
 
+
 import Dashboard from './Dashboard';
 import AdminDashboard from './AdminDashboard';
 
 
-const Login = () => {
-    const navigation = useNavigation()
+const Login = ({navigation}) => {
+    //const navigation = useNavigation()
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('') 
 
@@ -47,21 +48,43 @@ const Login = () => {
     }
 */    
 
+/*
+    useEffect(() => {
+        (firebase.firestore().collection('users2'))
+        if ("role" === "student") {
+            navigation.navigate('Dashboard')
+        } else {
+            navigation.navigate('AdminDashboard')
+        }
+    })
+*/
     loginUser = async(email, password) => {
         //const checkIfUserOrAdmin = firebase.firestore().collection('users2')
+        // var getUser2 = await firebase.collection('users2').doc('role').get() 
         try {
             await firebase.auth().signInWithEmailAndPassword(email, password)
-            .then((firebase.firestore().collection('users2')).where("role", "==", "student"))
+            .then((firebase.firestore().collection('users2')).doc('role').get())
             if ("role" === "student") {
-                navigation.navigate("dashboard");
-                console.log("User has entered");
+                navigation.navigate('dashboard');
+                console.log("User has entered dashboard view");
+            } else if ("role" === "admin") {
+                navigation.navigate('admindashboard');
+                console.log("Admin has entered dashboard view");
             } else {
-                navigation.navigate("admindashboard");
-                console.log("admin has entered");
+                console.log(err)
             }
+/*            .then((firebase.firestore().collection('users2')).where("role", "==", "student"))
+            if ("role" === "student") {
+                navigation.navigate('dashboard');
+                console.log("User has entered");
+            } else if ("role" === "admin") {
+                navigation.navigate('admindashboard');
+                console.log("Admin has entered");               
+            }*/
         } catch (error) {
             alert(error.message)
         }
+
 /*        
         checkIfUserOrAdmin.where("role", "==", (user?.role === "student"))
         if (checkIfUserOrAdmin) {
