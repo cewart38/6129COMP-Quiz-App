@@ -44,9 +44,9 @@ const Registration = () => {
     style={styles.container}
     behavior={Platform.OS === "ios" ? "padding" : "height"}
     > 
-        <View style={styles.stretch1}>  
-          <Image style={styles.stretch2} source={require('../assets/LoginImages/QuizAppLogo.png')} />
-        </View> 
+      {/*<View style={styles.stretch1}>  
+            <Image style={styles.stretch2} source={require('../assets/LoginImages/QuizAppLogo.png')} />
+          </View> */}
         <Text style={{fontWeight:'bold', fontSize:23, paddingTop: 5, paddingBottom: 10}}>
             Enter Your Information To Register
         </Text>    

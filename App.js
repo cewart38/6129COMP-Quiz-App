@@ -1,6 +1,6 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, StackNavigator} from 'react';
 import { firebase } from './FirebaseConfig';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
@@ -13,37 +13,33 @@ import AdminDashboard from "./src/AdminDashboard";
 import AddObject from "./src/AddObject";
 import ViewStudentScores from "./src/ViewStudentScores";
 
-
 const Stack = createStackNavigator();
+
+ // DashboardPage: {screen: Dashboard,},
+ // AdminDashboard: {screen: AdminDashboard,},
+
 
   function App() {
   const [initializing, setInitializing] = useState(true);
   const [user, setUser] = useState();
 
+  // Handle user state changes
   function onAuthStateChanged(user) {
     setUser(user);
     if (initializing) setInitializing(false);
   }
 
+  
   useEffect(() => {
+    // check if user is logged in or not and show relative screens based on whether a user is signed in
     const subscriber = firebase.auth().onAuthStateChanged(onAuthStateChanged);
     return subscriber;
   }, []);
 
   if (initializing) return null;
 
-/*
-  firebase.auth().currentUser.getIdTokenResult()
-  .then((idTokenResult) => {
-    if(!!idTokenResult.claims.admin) {
-      // show admin panel
-    } else {
-      // show regular ui panel
-    }
-  })
-*/  
 
-  const checkIfUserOrAdmin = firebase.firestore().collection('users2')
+//  const checkIfUserOrAdmin = firebase.firestore().collection('users2')
 
 /*
   const handleSignIn = () => {
@@ -61,7 +57,7 @@ const Stack = createStackNavigator();
   if (!user) {
     
     return (
-
+      
         <Stack.Navigator>
         <Stack.Screen name="login" 
         component={Login}
@@ -77,48 +73,52 @@ const Stack = createStackNavigator();
         />                     
       </Stack.Navigator>
       
-/*
-<Stack.Navigator>
-<Stack.Screen name="admindashboard" 
-component={AdminDashboard}
-options= {{
-  headerTitle: () => <Header name = "Admin Dashboard" />
-}}
-/> 
-<Stack.Screen name="addobject" 
-component={AddObject}
-options= {{
-  headerTitle: () => <Header name = "Add Object" />
-}}
-/> 
-</Stack.Navigator>
-*/
     );
   }
-
+ 
 
   return (
 
-    <Stack.Navigator>
+    
+    <Stack.Navigator>      
         <Stack.Screen name="dashboard" 
         component={Dashboard}
         options= {{
           headerTitle: () => <Header name = "Dashboard" />
         }}
         /> 
-      <Stack.Screen name="admindashboard" 
-      component={AdminDashboard}
-      options= {{
-      headerTitle: () => <Header name = "Admin Dashboard" />
+                <Stack.Screen name="admindashboard" 
+        component={AdminDashboard}
+        options= {{
+          headerTitle: () => <Header name = "Admin Dashboard" />
         }}
-/>            
+        /> 
+                <Stack.Screen name="addObject" 
+        component={AddObject}
+        options= {{
+          headerTitle: () => <Header name = "Add Object" />
+        }}
+        />    
+                <Stack.Screen name="scores" 
+        component={ViewStudentScores}
+        options= {{
+          headerTitle: () => <Header name = "Scores" />
+        }}
+        />                                                   
     </Stack.Navigator>
-    
 
-    //{handleSignIn}
 
-  )
 
+/*<Stack.Navigator initialRouteName="Login">
+  <Stack.Screen name="Login" component={Login} options={{headerShown: false}}/>
+  <Stack.Screen name="Register" component={Registration} options={{headerShown: false}}/>
+  <Stack.Screen name="Dashboard" component={Dashboard} options={{headerShown: false}}/>
+  <Stack.Screen name="AdminDashboard" component={AdminDashboard} options={{headerShown: false}}/>
+</Stack.Navigator>
+*/
+
+  ) 
+  
 
 
 

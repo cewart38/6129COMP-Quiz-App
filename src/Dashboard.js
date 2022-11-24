@@ -1,6 +1,8 @@
 import { StyleSheet, Text, View, SafeAreaView, TouchableOpacity, SnapshotViewIOS, Image } from 'react-native'
+import { useNavigation } from '@react-navigation/native'
 import React, {useState, useEffect} from 'react'
 import {firebase} from '../FirebaseConfig'
+import AddObject from './AddObject'
 //import TypeWriter from 'react-native-typewriter';
 
 const Dashboard = () => {
