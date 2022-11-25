@@ -4,12 +4,27 @@ import { COLORS, SIZES } from './constants';
 //import data, { getQuestions } from './questionService';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 //import { getQuestions } from './questionService';
-import { collection, getDocs } from "firebase/firestore";
-//import data from "./questionService";
+import { collection, Firestore, getDocs } from "firebase/firestore";
+import { firebase } from '../FirebaseConfig';
+import data from './questionService';
 
 const Quiz = () => {
 
-    const allQuestions = getQuestions();
+
+   
+    // function getQuestions () {
+    //     const myArray = [];
+    //     firebase.firestore().collection('questions').get().then(getDocuments => {
+    //         getDocuments.forEach(doc => {
+    //           const check = doc.data();
+    //             console.log(check);
+    //             myArray.push(check);
+    //     })});
+    //     return myArray;
+    // }
+
+
+    const allQuestions = data;
     const [questions, setQuestions] = useState([]);
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
     const [currentOptionSelected, setCurrentOptionSelected] = useState(null);
@@ -20,7 +35,7 @@ const Quiz = () => {
     const [showScoreModal, setShowScoreModal] = useState(false)
 
     const validateAnswer = (selectedOption) => {
-        let correct_option = allQuestions[currentQuestionIndex]['correct_option'];
+        let correct_option = allQuestions[currentQuestionIndex]['correct option'];
         setCurrentOptionSelected(selectedOption);
         setCorrectOption(correct_option);
         setIsOptionsDisabled(true);
@@ -86,7 +101,7 @@ const Quiz = () => {
                 <Text style={{
                     color: COLORS.black,
                     fontSize: 30
-                }}>{allQuestions[currentQuestionIndex]?.question}</Text>
+                }}>'What is This?'</Text>
 
                 {/* Image */}
                 <Image style={styles.logo} source={allQuestions[currentQuestionIndex]?.image} />

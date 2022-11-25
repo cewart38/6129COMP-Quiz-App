@@ -6,7 +6,6 @@ import Registration from './Registration'
 import { AiTwoToneMail } from "react-icons/ai";
 import TypeWriter from 'react-native-typewriter';
 
-
 const Login = () => {
     const navigation = useNavigation()
     const [email, setEmail] = useState('')
@@ -92,10 +91,18 @@ const Login = () => {
             >
                 <Text style={{fontWeight:'bold', fontSize:16}}>Click Here To Register</Text>
             </TouchableOpacity>
-        </View>
-    )    
 
-}
+        
+            <TouchableOpacity
+            onPress={() => navigation.navigate('test')}
+            style = {styles.button}
+            >
+            <Text style={{fontWeight:'bold', fontSize:22}}>Test</Text>
+            </TouchableOpacity>
+            </View>
+                )    
+
+        }
 
 export default Login
 

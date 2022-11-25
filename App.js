@@ -8,6 +8,8 @@ import { StyleSheet, Text, View } from 'react-native';
 import Registration from './src/Registration';
 import Login from './src/Login';
 import Dashboard from './src/Dashboard';
+import Quiz from "./src/Quiz";
+import Test from "./src/Test";
 import Header from './components/Header';
 
 
@@ -36,6 +38,12 @@ const Stack = createStackNavigator();
         component={Login}
         options= {{
           headerTitle: () => <Header name = "Login" />
+        }}
+        />
+        <Stack.Screen name="test"
+        component={Test}
+        options= {{
+          headerTitle: () => <Header name = "Test" />
         }}
         />
         <Stack.Screen name="registration" 

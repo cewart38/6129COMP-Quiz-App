@@ -3,7 +3,7 @@ import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
 
-const firebaseConfig = {
+export const firebaseConfig = {
     apiKey: "AIzaSyDT4r_7ED9ux8brX5vYHKiHlKJXwMrolhM",
     authDomain: "authtest151122.firebaseapp.com",
     projectId: "authtest151122",
