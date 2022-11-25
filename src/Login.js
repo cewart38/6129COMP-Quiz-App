@@ -12,6 +12,7 @@ import AdminDashboard from './AdminDashboard';
 
 
 const Login = ({navigation}) => {
+
     //const navigation = useNavigation()
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('') 
@@ -62,17 +63,24 @@ const Login = ({navigation}) => {
         //const checkIfUserOrAdmin = firebase.firestore().collection('users2')
         // var getUser2 = await firebase.collection('users2').doc('role').get() 
         try {
-            await firebase.auth().signInWithEmailAndPassword(email, password)
-            .then((firebase.firestore().collection('users2')).doc('role').get())
-            if ("role" === "student") {
-                navigation.navigate('dashboard');
-                console.log("User has entered dashboard view");
-            } else if ("role" === "admin") {
-                navigation.navigate('admindashboard');
-                console.log("Admin has entered dashboard view");
-            } else {
-                console.log(err)
+            await firebase.auth().signInWithEmailAndPassword(email, password);
+            firebase.firestore().collection('users')
+            .doc(firebase.auth().currentUser.uid).get()
+            .then(docSnapshot => {
+                const role = docSnapshot.data().role;
+                console.log(role);
+                if (role == "student") {
+                    navigation.navigate('dashboard');
+                    console.log("User has entered the user dashboard view");
+                } else if (role == "admin") {
+                    navigation.navigate('admindashboard');
+                    console.log("Admin has entered the admin dashboard view");
+                } 
+            }) 
+        } catch (error) {
+                alert(error.message)
             }
+
 /*            .then((firebase.firestore().collection('users2')).where("role", "==", "student"))
             if ("role" === "student") {
                 navigation.navigate('dashboard');
@@ -81,9 +89,6 @@ const Login = ({navigation}) => {
                 navigation.navigate('admindashboard');
                 console.log("Admin has entered");               
             }*/
-        } catch (error) {
-            alert(error.message)
-        }
 
 /*        
         checkIfUserOrAdmin.where("role", "==", (user?.role === "student"))

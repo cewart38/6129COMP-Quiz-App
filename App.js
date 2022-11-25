@@ -12,12 +12,15 @@ import Header from './components/Header';
 import AdminDashboard from "./src/AdminDashboard";
 import AddObject from "./src/AddObject";
 import ViewStudentScores from "./src/ViewStudentScores";
+import ViewScores from "./src/ViewScores";
 
 const Stack = createStackNavigator();
 
  // DashboardPage: {screen: Dashboard,},
  // AdminDashboard: {screen: AdminDashboard,},
 
+
+ 
 
   function App() {
   const [initializing, setInitializing] = useState(true);
@@ -58,7 +61,7 @@ const Stack = createStackNavigator();
     
     return (
       
-        <Stack.Navigator>
+      <Stack.Navigator>
         <Stack.Screen name="login" 
         component={Login}
         options= {{
@@ -75,11 +78,61 @@ const Stack = createStackNavigator();
       
     );
   }
- 
 
+
+  function IsAdmin() {
+    return (
+      <Stack.Navigator>
+    <Stack.Screen name="admindashboard" 
+    component={AdminDashboard}
+    options= {{
+      headerTitle: () => <Header name = "Admin Dashboard" />
+    }}
+    /> 
+    </Stack.Navigator>
+    )
+  }
+
+  
+
+  function IsUser() {
+    return (
+    <Stack.Navigator>
+    <Stack.Screen name="dashboard" 
+    component={Dashboard}
+    options= {{
+      headerTitle: () => <Header name = "Dashboard" />
+    }}
+    /> 
+    </Stack.Navigator>
+    )
+  }
+
+   
   return (
+    //Admin(),
+   // isUser()
 
+/*
+    <Stack.Navigator>
+      <Stack.Screen
+      name = "IsUser"
+      component={IsUser}
+      />
+      <Stack.Screen
+      name="IsAdmin"
+      component={IsAdmin}
+      />
+    </Stack.Navigator>
+*/
+
+//  return (
+
+  //  Admin()
+  //  isUser()
     
+
+   
     <Stack.Navigator>      
         <Stack.Screen name="dashboard" 
         component={Dashboard}
@@ -93,6 +146,9 @@ const Stack = createStackNavigator();
           headerTitle: () => <Header name = "Admin Dashboard" />
         }}
         /> 
+    </Stack.Navigator>
+
+ /*       
                 <Stack.Screen name="addObject" 
         component={AddObject}
         options= {{
@@ -107,6 +163,33 @@ const Stack = createStackNavigator();
         />                                                   
     </Stack.Navigator>
 
+    */
+  
+
+
+    /*
+    <NavigationContainer>
+      <Stack.Navigator>
+      <Stack.Screen name="dashboard"
+        //children={props => {Dashboard}} 
+        component={Dashboard}
+        //{() => <Dashboard {...this.props} />}
+        options= {{
+          headerTitle: () => <Header name = "Dashboard" />
+        }}
+        /> 
+      </Stack.Navigator>
+      <Stack.Navigator>
+      <Stack.Screen name="admindashboard" 
+        component={AdminDashboard}
+        options= {{
+          headerTitle: () => <Header name = "Admin Dashboard" />
+        }}
+        /> 
+      </Stack.Navigator>
+    </NavigationContainer>
+      */
+
 
 
 /*<Stack.Navigator initialRouteName="Login">
@@ -115,14 +198,21 @@ const Stack = createStackNavigator();
   <Stack.Screen name="Dashboard" component={Dashboard} options={{headerShown: false}}/>
   <Stack.Screen name="AdminDashboard" component={AdminDashboard} options={{headerShown: false}}/>
 </Stack.Navigator>
+
 */
 
+
+
   ) 
+
+
   
 
-
-
 }
+
+
+
+
 
 
 
@@ -133,3 +223,4 @@ export default () => {
     </NavigationContainer>
   )
 }
+
