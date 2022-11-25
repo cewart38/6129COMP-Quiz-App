@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigation } from '@react-navigation/native'
 import { firebase } from '../FirebaseConfig'
 import { StyleSheet, Text, View, TouchableOpacity, TextInput, Image  } from 'react-native'
@@ -6,17 +6,99 @@ import Registration from './Registration'
 import { AiTwoToneMail } from "react-icons/ai";
 import TypeWriter from 'react-native-typewriter';
 
-const Login = () => {
-    const navigation = useNavigation()
+import Dashboard from './Dashboard';
+import AdminDashboard from './AdminDashboard';
+
+
+const Login = ({navigation}) => {
+
+    //const navigation = useNavigation()
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('') 
 
-    loginUser = async(email, password) => {
-        try {
-            await firebase.auth().signInWithEmailAndPassword(email, password)
-        } catch (error) {
-            alert(error.message)
+/*    const [emailError, setEmailError] = useState('')
+    const [passwordError, setPasswordError] = useState('')
+
+    // validate error messages
+    const validate = () => {
+        if (!email.includes('@')) {
+            setEmailError('Invalid Email')
         }
+
+        else if (password.length < 6) {
+            setPasswordError('Password Must Be At Least 6 Characters')
+        }
+
+        else if (email.length === 0 ) {
+            setEmailError('Email Is Required')
+        }
+
+        else if (email.indexOf(' ') >= 0) {
+            setEmailError('Email Cannot Contain Spaces')
+        }
+
+        else if (password.indexOf(' ') >= 0) {
+            setPasswordError('Password Cannot Contain Spaces')
+        }
+        
+        else {
+            setEmailError('');
+            setPasswordError('');
+        }
+    }
+*/    
+
+/*
+    useEffect(() => {
+        (firebase.firestore().collection('users2'))
+        if ("role" === "student") {
+            navigation.navigate('Dashboard')
+        } else {
+            navigation.navigate('AdminDashboard')
+        }
+    })
+*/
+    loginUser = async(email, password) => {
+        //const checkIfUserOrAdmin = firebase.firestore().collection('users2')
+        // var getUser2 = await firebase.collection('users2').doc('role').get() 
+        try {
+            await firebase.auth().signInWithEmailAndPassword(email, password);
+            firebase.firestore().collection('users')
+            .doc(firebase.auth().currentUser.uid).get()
+            .then(docSnapshot => {
+                const role = docSnapshot.data().role;
+                console.log(role);
+                if (role == "student") {
+                    navigation.navigate('dashboard');
+                    console.log("User has entered the user dashboard view");
+                } else if (role == "admin") {
+                    navigation.navigate('admindashboard');
+                    console.log("Admin has entered the admin dashboard view");
+                } 
+            }) 
+        } catch (error) {
+                alert(error.message)
+            }
+
+/*            .then((firebase.firestore().collection('users2')).where("role", "==", "student"))
+            if ("role" === "student") {
+                navigation.navigate('dashboard');
+                console.log("User has entered");
+            } else if ("role" === "admin") {
+                navigation.navigate('admindashboard');
+                console.log("Admin has entered");               
+            }*/
+
+/*        
+        checkIfUserOrAdmin.where("role", "==", (user?.role === "student"))
+        if (checkIfUserOrAdmin) {
+        navigation.navigate('dashboard')
+      } else {
+        navigation.navigate('admindashboard')
+      }
+*/      
+
+        // code for role goes here + navigation
     }
 
     return (
@@ -172,6 +254,7 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         margin: 10,
     },
+    
     ImageStyle: {
         padding: 10,
         margin: 5,
