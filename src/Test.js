@@ -4,27 +4,31 @@ import { COLORS, SIZES } from './constants';
 //import data, { getQuestions } from './questionService';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 //import { getQuestions } from './questionService';
-import { collection, Firestore, getDocs } from "firebase/firestore";
-import { firebase } from '../FirebaseConfig';
-import data from './questionService';
+import { firebase } from "../FirebaseConfig";
+//import data from "./questionService";
+//import data from './QuizDataTest';
+import { getQuestions } from './quizData';
+import { async } from '@firebase/util';
 
-const Quiz = () => {
+
+//const quizQuestions = (await firebase.firestore().collection("questions").get()).docs[0].data()
 
 
-   
-    // function getQuestions () {
+
+const Quiz = async() => {
+
+    // async function getQuestions() {
     //     const myArray = [];
-    //     firebase.firestore().collection('questions').get().then(getDocuments => {
-    //         getDocuments.forEach(doc => {
-    //           const check = doc.data();
-    //             console.log(check);
-    //             myArray.push(check);
-    //     })});
+    //     const querySnapshot = await firebase.firestore().collection('questions').get();
+    //     querySnapshot.forEach(doc => {
+    //         const check = doc.data();
+    //         console.log(check);
+    //         myArray.push(check);
+    //     });
     //     return myArray;
     // }
 
-
-    const allQuestions = data;
+    const [allQuestions, setAllQuestions] = useState([]);
     const [questions, setQuestions] = useState([]);
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
     const [currentOptionSelected, setCurrentOptionSelected] = useState(null);
@@ -34,8 +38,17 @@ const Quiz = () => {
     const [showNextButton, setShowNextButton] = useState(false)
     const [showScoreModal, setShowScoreModal] = useState(false)
 
+    const getAllQuestions = async () => {
+        const questions = await getQuestions();
+        setAllQuestions([...questions]);
+    };
+    useEffect(() => {
+        getAllQuestions();
+      }, []); 
+
+
     const validateAnswer = (selectedOption) => {
-        let correct_option = allQuestions[currentQuestionIndex]['correct option'];
+        let correct_option = allQuestions[currentQuestionIndex].correct_option;
         setCurrentOptionSelected(selectedOption);
         setCorrectOption(correct_option);
         setIsOptionsDisabled(true);
@@ -101,7 +114,7 @@ const Quiz = () => {
                 <Text style={{
                     color: COLORS.black,
                     fontSize: 30
-                }}>'What is This?'</Text>
+                }}>{allQuestions[currentQuestionIndex]?.question}</Text>
 
                 {/* Image */}
                 <Image style={styles.logo} source={allQuestions[currentQuestionIndex]?.image} />
@@ -111,8 +124,7 @@ const Quiz = () => {
     const renderOptions = () => {
         return (
             <View>
-                {
-                    allQuestions[currentQuestionIndex]?.options.map(option => (
+                {allQuestions[currentQuestionIndex]?.options.map(option => (
                         <TouchableOpacity 
                         onPress={()=> validateAnswer(option)}
                         disabled={isOptionsDisabled}

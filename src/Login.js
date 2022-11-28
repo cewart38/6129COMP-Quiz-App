@@ -173,6 +173,12 @@ const Login = ({navigation}) => {
             >
                 <Text style={{fontWeight:'bold', fontSize:16}}>Click Here To Register</Text>
             </TouchableOpacity>
+            <TouchableOpacity
+                onPress={() => navigation.navigate('test')}
+                style = {styles.button}
+            >
+                <Text style={{fontWeight:'bold', fontSize:22}}>Login</Text>
+            </TouchableOpacity>
 
         
             <TouchableOpacity
