@@ -7,5 +7,5 @@ export const getQuestions = async() => {
         const check = doc.data();
         myArray.push(check);
     });
-    console.log(myArray);
+    //console.log(myArray);
 };
