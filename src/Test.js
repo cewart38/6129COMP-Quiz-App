@@ -100,7 +100,7 @@ const Quiz = () => {
     return (
        <SafeAreaView style={{
            flex: 1
-       }}>{console.log(allQuestions)}
+       }}>
            <StatusBar barStyle="light-content" backgroundColor={COLORS.primary} />
            <View style={{
                flex: 1,
