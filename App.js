@@ -70,12 +70,6 @@ const Stack = createStackNavigator();
           headerTitle: () => <Header name = "Login" />
         }}
         />
-        <Stack.Screen name="test"
-        component={Test}
-        options= {{
-          headerTitle: () => <Header name = "Test" />
-        }}
-        />
         <Stack.Screen name="registration" 
         component={Registration}
         options= {{
@@ -112,6 +106,12 @@ const Stack = createStackNavigator();
       headerTitle: () => <Header name = "Dashboard" />
     }}
     /> 
+    <Stack.Screen name="quiz"
+    component={Quiz}
+    options= {{
+      headerTitle: () => <Header name = "Quiz" />
+    }}
+        />
     </Stack.Navigator>
     )
   }

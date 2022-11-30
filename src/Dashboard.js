@@ -5,7 +5,7 @@ import {firebase} from '../FirebaseConfig'
 import AddObject from './AddObject'
 //import TypeWriter from 'react-native-typewriter';
 
-const Dashboard = () => {
+const Dashboard = ({navigation}) => {
 
     const [name, setName] = useState('')
 
@@ -35,6 +35,7 @@ const Dashboard = () => {
 
             <View style={styles.containerTwo}>
                 <TouchableOpacity
+                onPress={() => navigation.navigate('quiz')}
                 style={styles.buttonStyle}
                 activeOpacity={0.5}>
                     <Image source={require("../assets/DashboardImages/ExamPaper.png")}

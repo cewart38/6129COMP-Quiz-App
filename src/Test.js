@@ -8,7 +8,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 
 const Quiz = () => {
 
-    const [allQuestions, setAllQuestions] = useState([])
+    const [allQuestions, setAllQuestions] = useState({})
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
     const [currentOptionSelected, setCurrentOptionSelected] = useState(null);
     const [correctOption, setCorrectOption] = useState(null);
@@ -17,15 +17,37 @@ const Quiz = () => {
     const [showNextButton, setShowNextButton] = useState(false)
     const [showScoreModal, setShowScoreModal] = useState(false)
 
+    // const getAllQuestions = async () => {
+    //     const questions = await getQuestions();
+    //     setAllQuestions([questions]);
+    //   }
+    // useEffect(() => {
+    //     getAllQuestions();
+    //   }, []); 
+
+    //   console.log('All Questions MOF', allQuestions)
+
 
     const getAllQuestions = async () => {
-        const questions = await getQuestions();
-        setAllQuestions([...questions]);
-        console.log("All Questions", allQuestions);
-    };
-    useEffect(() => {
-        getAllQuestions();
-      }, []); 
+    const questions = await getQuestions();
+
+    // Transform and shuffle options
+    let tempQuestions = [];
+    await questions.docs.forEach(async res => {
+      let question = res.data();
+      await tempQuestions.push(question);
+      console.log('tempQuestions', tempQuestions);
+    });
+
+    setAllQuestions([tempQuestions]);
+  };
+
+  useEffect(() => {
+    getAllQuestions();
+  }, []);
+
+
+  console.log('allQuestions', allQuestions);
 
     const validateAnswer = (selectedOption) => {
         let correct_option = allQuestions[currentQuestionIndex]['correct_option'];
@@ -74,10 +96,9 @@ const Quiz = () => {
         }).start();
     }
 
-
-
     const renderQuestion = () => {
         return (
+
             <View style={{
                 marginVertical: 40
             }}>
@@ -91,12 +112,12 @@ const Quiz = () => {
                 </View>
 
                 {/* Image */}
-                <Image style={styles.logo} source={allQuestions.image} />
+                <Image style={styles.logo} source={allQuestions[currentQuestionIndex]?.image} />
             </View>
         )
     }
 
-
+    return  allQuestions.map ((questions) => {
     return (
        <SafeAreaView style={{
            flex: 1
@@ -120,15 +141,15 @@ const Quiz = () => {
                     alignItems: 'flex-end'
                 }}>
                     <Text style={{color: COLORS.black, fontSize: 20, opacity: 0.6, marginRight: 2}}>{currentQuestionIndex+1}</Text>
-                    <Text data={allQuestions}style={{color: COLORS.black, fontSize: 18, opacity: 0.6}}>/ {allQuestions.length}</Text>
+                    <Text style={{color: COLORS.black, fontSize: 18, opacity: 0.6}}>/ {questions.length}</Text>
                 </View>
 
                 {/* Image */}
-                <Image style={styles.logo} source={allQuestions[currentQuestionIndex]?.image} />
+                <Image style={styles.logo} source={questions[currentQuestionIndex]?.image} />
             </View>
                </View></SafeAreaView>
 
-    )}
+    )})}
 
 
     const styles= StyleSheet.create({

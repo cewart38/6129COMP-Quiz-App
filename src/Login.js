@@ -182,7 +182,7 @@ const Login = ({navigation}) => {
 
         
             <TouchableOpacity
-            onPress={() => navigation.navigate('test')}
+            onPress={() => navigation.navigate('quiz')}
             style = {styles.button}
             >
             <Text style={{fontWeight:'bold', fontSize:22}}>Test</Text>
