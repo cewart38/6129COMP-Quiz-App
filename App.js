@@ -148,12 +148,25 @@ const Stack = createStackNavigator();
           headerTitle: () => <Header name = "Dashboard" />
         }}
         /> 
+        
                 <Stack.Screen name="admindashboard" 
         component={AdminDashboard}
         options= {{
           headerTitle: () => <Header name = "Admin Dashboard" />
         }}
         /> 
+            <Stack.Screen name="quiz"
+    component={Quiz}
+    options= {{
+      headerTitle: () => <Header name = "Quiz" />
+    }}
+        />
+    <Stack.Screen name="viewScores"
+    component={ViewScores}
+    options= {{
+      headerTitle: () => <Header name = "viewScores" />
+    }}
+        />
     </Stack.Navigator>
 
  /*       

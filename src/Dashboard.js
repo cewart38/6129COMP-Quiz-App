@@ -49,6 +49,7 @@ const Dashboard = ({navigation}) => {
 
             <View style={styles.containerTwo}>
                 <TouchableOpacity
+                onPress={() => navigation.navigate('viewScores')}
                 style={styles.buttonStyle}
                 activeOpacity={0.5}>
                     <Image source={require("../assets/DashboardImages/AGrade.png")}

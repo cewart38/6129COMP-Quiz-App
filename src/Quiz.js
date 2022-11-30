@@ -66,6 +66,11 @@ const Quiz = () => {
         }).start();
     }
 
+    function functionCombined(){
+        restartQuiz();
+        saveScore();
+    }
+
     const saveScore = (score) => {
 
           const game = {
@@ -73,7 +78,7 @@ const Quiz = () => {
             Date: moment().format('LLL'),
           };
           saveGame(game);
-          return state;
+          return score;
     };
 
 
@@ -273,7 +278,7 @@ const Quiz = () => {
                            </View>
                            {/* Retry Quiz button */}
                            <TouchableOpacity
-                           onPress={restartQuiz}
+                           onPress={() => saveScore(score) + restartQuiz() }
                            style={{
                                backgroundColor: COLORS.accent,
                                padding: 20, width: '100%', borderRadius: 20

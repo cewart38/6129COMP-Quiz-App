@@ -504,6 +504,6 @@ const questions = [
 
   const shuffledArray = shuffleArray(questions);
 
-  const getQuestions = shuffledArray.slice(0,5);
+  const getQuestions = shuffledArray.slice(0,20);
 
   export default data = getQuestions;
