@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigation } from '@react-navigation/native'
 import { firebase } from '../FirebaseConfig'
-import { StyleSheet, Text, View, TouchableOpacity, TextInput, Image  } from 'react-native'
+import { StyleSheet, Text, View, TouchableOpacity, TextInput, Image, KeyboardAvoidingView  } from 'react-native'
 import Registration from './Registration'
 import { AiTwoToneMail } from "react-icons/ai";
 import TypeWriter from 'react-native-typewriter';
@@ -102,7 +102,7 @@ const Login = ({navigation}) => {
     }
 
     return (
-            <View style={styles.container}>
+            <KeyboardAvoidingView style={styles.container}>
 
             <View style={styles.stretch1}>  
                <Image style={styles.stretch2} source={require('../assets/LoginImages/QuizAppLogo.png')} />
@@ -187,7 +187,7 @@ const Login = ({navigation}) => {
             >
             <Text style={{fontWeight:'bold', fontSize:22}}>Test</Text>
             </TouchableOpacity>
-            </View>
+            </KeyboardAvoidingView>
                 )    
 
         }

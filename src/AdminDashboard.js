@@ -22,9 +22,9 @@ const AdminDashboard = () => {
         setShowForm(!showForm);
     }
 
-/*
+
     useEffect(() => {
-        firebase.firestore().collection('admin')
+        firebase.firestore().collection('users')
         .doc(firebase.auth().currentUser.uid).get()
         .then((snapshot) => {
             if(snapshot.exists) {
@@ -34,9 +34,10 @@ const AdminDashboard = () => {
             }
         })
     }, [])
-*/    
+    
 
 
+/*
     const todoRef = firebase.firestore().collection('addDataTest');
     const [addData, setAddData] = useState('');
 
@@ -63,6 +64,7 @@ const AdminDashboard = () => {
                 })
         }
     }
+*/    
 
 
 
@@ -76,28 +78,9 @@ const AdminDashboard = () => {
 {/*            <Text typing={1} style={styles.text}>
                 Welcome, {name.firstName} {name.lastName}
     </Text> */}
-            <Text>Welcome {name.firstName}{name.lastName} to the admin dashboard </Text>
-            <TouchableOpacity onPress={() => firebase.auth().signOut()}>
-                <Text style={{fontSize:22, fontWeight:'bold'}}>Sign Out</Text>
-            </TouchableOpacity>
 
-            <View style={styles.formContainer}>
-                <TextInput
-                    style={styles.input}
-                    placeholder = 'Add name of Object'
-                    placeholderTextColor='#aaaaa'
-                    onChangeText= {(heading) => setAddData(heading)}
-                    value={addData}
-                    multiline={true}
-                    underlineColorAndroid='transparent'
-                    autoCorrect={true}
-                    autoCapitalize='none'
-                />
-                
-                <TouchableOpacity style={styles.button} onPress={addField}>
-                    <Text style={styles.buttonText}>Add</Text>
-                </TouchableOpacity>
-            </View>
+            <Text style={styles.Welcome}> Welcome To The Admin Dashboard </Text>
+            <Text style={styles.welcomeName}> {name.firstName} {name.lastName} </Text>
 
             <View style={styles.containerTwo}>
                 <TouchableOpacity
@@ -105,7 +88,7 @@ const AdminDashboard = () => {
                 activeOpacity={0.5}
                 onPress={() => navigation.navigate('addobject')}
                 >
-                    <Image source={require("../assets/DashboardImages/AGrade.png")}
+                    <Image source={require("../assets/AdminDashboardImages/PlusIcon.png")}
                     style={styles.buttonImageIconStyle} />
                         <View style={styles.buttonIconSeparatorStyle} />
                         <Text style={styles.buttonTextStyle}>
@@ -117,8 +100,10 @@ const AdminDashboard = () => {
             <View style={styles.containerTwo}>
                 <TouchableOpacity
                 style={styles.buttonStyle}
-                activeOpacity={0.5}>
-                    <Image source={require("../assets/DashboardImages/AGrade.png")}
+                activeOpacity={0.5}
+                onPress={() => navigation.navigate('viewstudentscores')}
+                >
+                    <Image source={require("../assets/AdminDashboardImages/StudentIcon.png")}
                     style={styles.buttonImageIconStyle} />
                         <View style={styles.buttonIconSeparatorStyle} />
                         <Text style={styles.buttonTextStyle}>
@@ -126,6 +111,10 @@ const AdminDashboard = () => {
                         </Text>
                 </TouchableOpacity>
             </View>    
+
+            <TouchableOpacity style={styles.logOutButton} onPress={() => firebase.auth().signOut()}>
+                <Text style={{fontSize:22, fontWeight:'bold', color: '#fff'}}>Sign Out</Text>
+            </TouchableOpacity>
 
             
         </SafeAreaView>
@@ -189,6 +178,30 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         width: 2,
         height: 60,
+      },
+
+      logOutButton: {
+        marginTop: 150,
+        height: 70,
+        width: 250,
+        //backgroundColor: '#026EFD',
+        backgroundColor: '#268001',
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderRadius: 50, 
+      },
+
+      welcomeName: {
+        paddingTop: 0,
+        justifyContent: 'center',
+        fontSize: 25,
+      },
+
+      Welcome: {
+        paddingTop: 40,
+        fontWeight: 'bold',
+        fontFamily: (Platform.OS === 'ios') ? 'Chalkduster' : 'Arial',
+        fontSize: 15,
       },
 
 

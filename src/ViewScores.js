@@ -11,4 +11,5 @@ const ViewScores = () => {
 
 export default ViewScores
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+})
