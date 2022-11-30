@@ -21,9 +21,6 @@ const Stack = createStackNavigator();
  // DashboardPage: {screen: Dashboard,},
  // AdminDashboard: {screen: AdminDashboard,},
 
-
- 
-
   function App() {
   const [initializing, setInitializing] = useState(true);
   const [user, setUser] = useState();
@@ -118,29 +115,7 @@ const Stack = createStackNavigator();
 
    
   return (
-    //Admin(),
-   // isUser()
 
-/*
-    <Stack.Navigator>
-      <Stack.Screen
-      name = "IsUser"
-      component={IsUser}
-      />
-      <Stack.Screen
-      name="IsAdmin"
-      component={IsAdmin}
-      />
-    </Stack.Navigator>
-*/
-
-//  return (
-
-  //  Admin()
-  //  isUser()
-    
-
-   
     <Stack.Navigator>      
         <Stack.Screen name="dashboard" 
         component={Dashboard}
@@ -148,11 +123,28 @@ const Stack = createStackNavigator();
           headerTitle: () => <Header name = "Dashboard" />
         }}
         /> 
-        
-                <Stack.Screen name="admindashboard" 
-        component={AdminDashboard}
+        <Stack.Screen name="dashboard" 
+        component={Dashboard}
         options= {{
-          headerTitle: () => <Header name = "Admin Dashboard" />
+          headerTitle: () => <Header name = "Dashboard" />
+        }}
+        /> 
+        <Stack.Screen name="quiz" 
+        component={Quiz}
+        options= {{
+          headerTitle: () => <Header name = "Quiz" />
+        }}
+        /> 
+        <Stack.Screen name="addobject" 
+        component={AddObject}
+        options= {{
+          headerTitle: () => <Header name = "Add Object" />
+        }}
+        /> 
+        <Stack.Screen name="viewstudentscores" 
+        component={ViewStudentScores}
+        options= {{
+          headerTitle: () => <Header name = "View Scores" />
         }}
         /> 
             <Stack.Screen name="quiz"

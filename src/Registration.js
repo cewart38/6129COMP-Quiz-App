@@ -8,17 +8,19 @@ const Registration = () => {
   const [password, setPassword] = useState('')
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
+  //const [role, setRole] = useState('')
 
-  registerUser = async (email, password, firstName, lastName) => {
-    
+  role = "student";
+
+  registerUser = async (email, password, firstName, lastName, role) => {
     await firebase.auth().createUserWithEmailAndPassword(email, password)
     .then(() => {
       firebase.auth().currentUser.sendEmailVerification({
         handleCodeInApp: true,
-        url:'https://authtest151122.firebaseapp.com'
+        url:'https://authtest151122.firebaseapp.com',
       })
       .then(() => {
-        alert('Check your emails, verification email sent!')
+        alert('Verification Email Sent')
       }).catch((error) => {
         alert(error.message)
       })
@@ -29,14 +31,17 @@ const Registration = () => {
           email,
           firstName,
           lastName,
+          role,
         })
       })
       .catch((error) => {
         alert(error.message)
       })
-    }).catch((error => {
+    })
+    .catch((error => {
       alert(error.message)
     }))
+
   }
 
   return (
@@ -112,7 +117,7 @@ const Registration = () => {
             </View>  
             {/*</KeyboardAvoidingView>*/}                                        
         <TouchableOpacity
-            onPress={() => registerUser(email, password, firstName, lastName)}
+            onPress={() => registerUser(email, password, firstName, lastName, role)}
             style={styles.button}
         >
             <Text style={{fontWeight:'bold', fontSize:22, color:'black'}}>Register</Text>
@@ -120,9 +125,7 @@ const Registration = () => {
     </KeyboardAvoidingView>
 
     
- )  
-
-
+ ) 
 }
 
 export default Registration
@@ -195,7 +198,5 @@ stretch2: {
   margin: 10,
   resizeMode: '',
 },
-
-
 
 })
