@@ -83,7 +83,7 @@ const AdminDashboard = () => {
             <Text style={styles.welcomeName}> {name.firstName} {name.lastName} </Text>
 
             <View style={styles.containerTwo}>
-                <TouchableOpacity
+                {/* <TouchableOpacity
                 style={styles.buttonStyle}
                 activeOpacity={0.5}
                 onPress={() => navigation.navigate('addobject')}
@@ -94,7 +94,7 @@ const AdminDashboard = () => {
                         <Text style={styles.buttonTextStyle}>
                         Add Object
                         </Text>
-                </TouchableOpacity>
+                </TouchableOpacity> */}
             </View>    
 
             <View style={styles.containerTwo}>

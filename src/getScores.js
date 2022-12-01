@@ -15,8 +15,9 @@ import {
   
     const q = query(
       collection(db, "quizAttempt"),
-      where("userId", "==", uid),
-      orderBy("date", "desc")
+      where("userId", "==", uid)
     );
     return await getDocs(q);
   }
+
+  

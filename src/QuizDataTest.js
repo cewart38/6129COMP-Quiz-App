@@ -1,4 +1,4 @@
-const questions = [
+export const questions = [
     {
         image: require('./images/1apple.jpg'),
         options: ["Apple","Bannana","Watermelon","Peach"],
@@ -229,7 +229,7 @@ const questions = [
     },
     {
         image: require('./images/48rug.jpg'),
-        options: ["Sink","Lemon","Shoes","Watch"],
+        options: ["Sink","Rug","Shoes","Watch"],
         correct_option: "Rug"
     },
     {
@@ -259,8 +259,8 @@ const questions = [
     },
     {
         image: require('./images/54melon.png'),
-        options: ["Plate","Bowl","Melon","Knife"],
-        correct_option: "Melon"
+        options: ["Plate","Bowl","Watermelon","Knife"],
+        correct_option: "Watermelon"
     },
     {
         image: require('./images/55coconut.png'),
@@ -295,7 +295,7 @@ const questions = [
     {
         image: require('./images/61headphones.png'),
         options: ["Headphones","Chair","Weights","Picture Frame"],
-        correct_option: "Jug"
+        correct_option: "Headphones"
     },
     {
         image: require('./images/62controller.png'),
@@ -427,7 +427,7 @@ const questions = [
     {
         image: require('./images/88cushion.png'),
         options: ["Towel","Rug","Dog Toy","Microwave"],
-        correct_option: "Dog Toy"
+        correct_option: "Cushion"
     },
     {
         image: require('./images/89birthdayCard.png'),
@@ -484,13 +484,13 @@ const questions = [
     },
     {
         image: require('./images/100pencilCase.png'),
-        options: ["Basketball","Remote","Drawer","Microwave"],
+        options: ["Basketball","Remote","Pencil Case","Microwave"],
         correct_option: "Pencil Case"
     }
   ]
 
 
-  const shuffleArray = array => {
+  export let shuffleArray = array => {
     for (let i = array.length - 1; i > 0; i--) {
       // Generate random number
       let j = Math.floor(Math.random() * (i + 1));
@@ -502,8 +502,6 @@ const questions = [
     return array;
   };
 
-  const shuffledArray = shuffleArray(questions);
+  export let shuffledArray = shuffleArray(questions).slice(0,20);
 
-  const getQuestions = shuffledArray.slice(0,20);
-
-  export default data = getQuestions;
+  export default data = shuffledArray;

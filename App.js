@@ -123,12 +123,6 @@ const Stack = createStackNavigator();
           headerTitle: () => <Header name = "Dashboard" />
         }}
         /> 
-        <Stack.Screen name="dashboard" 
-        component={Dashboard}
-        options= {{
-          headerTitle: () => <Header name = "Dashboard" />
-        }}
-        /> 
         <Stack.Screen name="quiz" 
         component={Quiz}
         options= {{
@@ -140,19 +134,13 @@ const Stack = createStackNavigator();
         options= {{
           headerTitle: () => <Header name = "Add Object" />
         }}
-        /> 
+         /> 
         <Stack.Screen name="viewstudentscores" 
         component={ViewStudentScores}
         options= {{
           headerTitle: () => <Header name = "View Scores" />
         }}
         /> 
-            <Stack.Screen name="quiz"
-    component={Quiz}
-    options= {{
-      headerTitle: () => <Header name = "Quiz" />
-    }}
-        />
     <Stack.Screen name="viewScores"
     component={ViewScores}
     options= {{

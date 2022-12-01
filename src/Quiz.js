@@ -1,15 +1,16 @@
 import React, { useState } from 'react'
 import { StyleSheet, View, Text, SafeAreaView, StatusBar, Image, TouchableOpacity, Modal, Animated } from 'react-native'
 import { COLORS, SIZES } from './constants';
-import data from './QuizDataTest';
+import data, { questions, shuffleArray, shuffledArray } from './QuizDataTest';
 import { saveGame } from './saveScore';
 import { firebase, addDoc } from '../FirebaseConfig'
 import moment from 'moment/moment';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { getQuestions } from './QuizDataTest';
 
-const Quiz = () => {
+const Quiz = ({navigation}) => {
 
-    const allQuestions = data;
+    let allQuestions = shuffledArray;
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
     const [currentOptionSelected, setCurrentOptionSelected] = useState(null);
     const [correctOption, setCorrectOption] = useState(null);
@@ -59,6 +60,9 @@ const Quiz = () => {
         setCorrectOption(null);
         setIsOptionsDisabled(false);
         setShowNextButton(false);
+        allQuestions = null;
+        allQuestions = shuffleArray(questions);
+        allQuestions = allQuestions.slice(0,20);
         Animated.timing(progress, {
             toValue: 0,
             duration: 1000,
@@ -75,7 +79,7 @@ const Quiz = () => {
 
           const game = {
             score: score,
-            Date: moment().format('LLL'),
+            date: moment().format('LLL'),
           };
           saveGame(game);
           return score;
@@ -85,22 +89,23 @@ const Quiz = () => {
     const renderQuestion = () => {
         return (
             <View style={{
-                marginVertical: 40
+                marginVertical: 20,
+                alignItems: 'center'
             }}>
                 {/* Question Counter */}
                 <View style={{
                     flexDirection: 'row',
                     alignItems: 'flex-end'
                 }}>
-                    <Text style={{color: COLORS.black, fontSize: 20, opacity: 0.6, marginRight: 2}}>{currentQuestionIndex+1}</Text>
-                    <Text style={{color: COLORS.black, fontSize: 18, opacity: 0.6}}>/ {allQuestions.length}</Text>
+                    <Text style={{color: COLORS.black, fontSize: 25, opacity: 0.6, marginRight: 2}}>{currentQuestionIndex+1}</Text>
+                    <Text style={{color: COLORS.black, fontSize: 23, opacity: 0.6}}>/ {allQuestions.length}</Text>
                 </View>
 
                 {/* Question */}
                 <Text style={{
                     color: COLORS.black,
-                    fontSize: 30
-                }}>{allQuestions[currentQuestionIndex]?.question}</Text>
+                    fontSize: 35
+                }}>What is This?</Text>
 
                 {/* Image */}
                 <Image style={styles.logo} source={allQuestions[currentQuestionIndex]?.image} />
@@ -122,17 +127,17 @@ const Quiz = () => {
                             ? COLORS.success
                             : option==currentOptionSelected 
                             ? COLORS.error 
-                            : COLORS.secondary+'40',
+                            : COLORS.secondary+'80',
                             backgroundColor: option==correctOption 
                             ? COLORS.success +'20'
                             : option==currentOptionSelected 
                             ? COLORS.error +'20'
                             : COLORS.secondary+'20',
-                            height: 60, borderRadius: 20,
+                            height: 70, borderRadius: 40,
                             flexDirection: 'row',
                             alignItems: 'center', justifyContent: 'space-between',
                             paddingHorizontal: 20,
-                            marginVertical: 10
+                            marginVertical: 3
                         }}
                         >
                             <Text style={{fontSize: 20, color: COLORS.black}}>{option}</Text>
@@ -217,9 +222,8 @@ const Quiz = () => {
 
 
     return (
-       <SafeAreaView style={{
-           flex: 1
-       }}>
+       <SafeAreaView style={styles.safeArea
+       }>
            <StatusBar barStyle="light-content" backgroundColor={COLORS.primary} />
            <View style={{
                flex: 1,
@@ -254,13 +258,13 @@ const Quiz = () => {
                        justifyContent: 'center'
                    }}>
                        <View style={{
-                           backgroundColor: COLORS.white,
+                           backgroundColor: COLORS.primary,
                            width: '90%',
                            borderRadius: 20,
                            padding: 20,
                            alignItems: 'center'
                        }}>
-                           <Text style={{fontSize: 30, fontWeight: 'bold'}}>{ score> (allQuestions.length/2) ? 'Congratulations!' : 'Oops!' }</Text>
+                           <Text style={{fontSize: 30, fontWeight: 'bold'}}>{ score> (allQuestions.length/2) ? 'Congratulations!' : 'Nice Try!' }</Text>
 
                            <View style={{
                                flexDirection: 'row',
@@ -280,6 +284,7 @@ const Quiz = () => {
                            <TouchableOpacity
                            onPress={() => saveScore(score) + restartQuiz() }
                            style={{
+                               marginVertical: 30,
                                backgroundColor: COLORS.accent,
                                padding: 20, width: '100%', borderRadius: 20
                            }}>
@@ -289,7 +294,7 @@ const Quiz = () => {
                            </TouchableOpacity>
                             {/* Return Home Button */}
                             <TouchableOpacity
-                           onPress={() => saveScore(score)}
+                           onPress={() => saveScore(score) + navigation.navigate('dashboard')}
                            style={{
                                backgroundColor: COLORS.accent,
                                padding: 20, width: '100%', borderRadius: 20
@@ -310,9 +315,15 @@ const Quiz = () => {
 
 const styles= StyleSheet.create({
     logo: {
-        width: 100,
-        height: 100,
-    }
+        width: '50%',
+        height: undefined,
+        aspectRatio: 1/1,
+        resizeMode: 'contain',
+    },
+    safeArea: {
+        flex: 1,
+        backgroundColor: 'yellow'
+       }
 
 })
 

@@ -2,7 +2,7 @@ import { StyleSheet, Text, View, SafeAreaView, TouchableOpacity, SnapshotViewIOS
 import { useNavigation } from '@react-navigation/native'
 import React, {useState, useEffect} from 'react'
 import {firebase} from '../FirebaseConfig'
-import AddObject from './AddObject'
+
 //import TypeWriter from 'react-native-typewriter';
 
 const Dashboard = ({navigation}) => {
@@ -23,10 +23,6 @@ const Dashboard = ({navigation}) => {
 
     return (
         <SafeAreaView style={styles.container}>
-{/*            <Text typing={1} style={styles.text}>
-                Welcome, {name.firstName} {name.lastName}
-    </Text> */}
-
 
             <Text style={styles.Welcome}> Welcome To Your Dashboard </Text>
             <Text style={styles.welcomeName}> {name.firstName} {name.lastName} </Text>

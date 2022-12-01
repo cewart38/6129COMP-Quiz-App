@@ -1,58 +1,59 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
-import { getSavedGames } from './images/getScores'
+import { StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useState, useEffect } from 'react';
+import {
+    addDoc,
+    collection,
+    doc,
+    getDoc,
+    getFirestore,
+    setDoc,
+    updateDoc,
+  } from "firebase/firestore";
 import { firebase } from '../FirebaseConfig';
 import { QuerySnapshot } from 'firebase/firestore';
 import { FlatList } from 'react-native-gesture-handler';
 import Pressable from 'react-native/Libraries/Components/Pressable/Pressable';
+import { getApp } from "firebase/app";
+import { getAuth } from "firebase/auth";
+import { getSavedGames } from './getScores';
+
 
 const ViewScores = () => {
+  
   const [games, setGames] = useState([]);
-  const todoRef = firebase.firestore().collection('quizAttempt')
+  //const [user, loading, error] = useAuthState(auth);
+  const app = getApp();
+  const auth = getAuth(app);
+  const uid = auth.currentUser.uid;
+
+  console.log('User', uid)
+
+  useEffect(() => {
+      let gamesFromDb = [];
+      getSavedGames(uid).then((res) => {
+        res.forEach((doc) => {
+          gamesFromDb.push(doc.data());
+        });
+        setGames(gamesFromDb);
+      });
+    }
+  , [])
 
 
-  useEffect(async() => {
-    todoRef.onSnapshot.doc(firebase.auth().currentUser.uid).get()(
-      QuerySnapshot => {
-        const games = []
-        QuerySnapshot.forEach((doc) => {
-          const { score, date } = doc.data()
-          games.push({
-            id: doc.id,
-            score,
-            date
-          })
-        })
-        setGames(games)
-      }
-    )
-  })
+  return (
+    <FlatList
+      data={games}
+      renderItem={({ item }) => (
+        <View style={{ height: 50, flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+          <Text>Score: {item.score}</Text>
+          <Text>Date: {item.date}</Text>
+        </View>
+      )}
+    />
+  );
+}
 
-  return(
-    <SafeAreaView  style={styles.container}>
-  <FlatList
-  style={{height:'100%'}}
-  data={games}
-  numColumns={1}
-  renderItem={({game}) => (
-    <Pressable
-    style={StyleSheet.container}
-    >
-
-    <view style={StyleSheet.innerContainer}>
-      <text style={StyleSheet.score}>{game.score}</text>
-      <text style={StyleSheet.date}>{game.date}</text>
-
-    </view>
-        </Pressable>
-  )}
-  />
-   </SafeAreaView>
-  )}
-
-export default ViewScores
 
 const styles = StyleSheet.create({
 
@@ -169,3 +170,5 @@ logOutButton: {
 },
 
 })
+
+export default ViewScores
