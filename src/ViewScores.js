@@ -42,15 +42,20 @@ const ViewScores = () => {
 
 
   return (
+    <View style={styles.container}>
     <FlatList
       data={games}
       renderItem={({ item }) => (
-        <View style={{ height: 50, flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-          <Text>Score: {item.score}</Text>
-          <Text>Date: {item.date}</Text>
+        <View style={{ height: 100, flex: 1, alignItems: 'center', justifyContent: 'center', }}>
+          <View style={styles.innerContainer}>
+          <Text style={styles.scoreText}>Score: {item.score}/20</Text>
+          <Text style={styles.dateText}>{item.date}</Text>
+          </View>
         </View>
       )}
+ 
     />
+    </View>
   );
 }
 
@@ -63,6 +68,25 @@ const styles = StyleSheet.create({
     //marginTop: 100,
     backgroundColor: 'yellow',
 },
+
+  innerContainer: {
+    padding: 15,
+    borderRadius: 15,
+    alignItems: 'center',
+    backgroundColor: '#268001',
+    paddingTop: 10,
+  },
+
+  scoreText: {
+    color: 'white',
+    fontWeight: 'bold',
+    fontSize: 20
+  },
+
+  dateText: {
+    paddingTop: 2,
+    color: 'white'
+  },
 
 textInput: {
     paddingTop: 20,

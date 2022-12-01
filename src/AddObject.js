@@ -2,7 +2,7 @@ import { StyleSheet, Text, View, TouchableOpacity, SafeAreaView, Alert, Image, B
 import React, {useEffect, useState} from 'react';
 //import * as ImagePicker from 'expo-image-picker';
 //import {imagePicker} from 'expo-image-picker';
-import * as ImagePicker from 'expo-image-picker';
+//import * as ImagePicker from 'expo-image-picker';
 import {firebase} from '../FirebaseConfig';
 import { TextInput } from 'react-native-gesture-handler';
 import {getStorage, ref, uploadBytesResumable, getDownloadURL} from "firebase/storage";
