@@ -55,6 +55,8 @@ const Quiz = ({navigation}) => {
 
         setShowScoreModal(false);
 
+        Speech.stop();
+
         setCurrentQuestionIndex(0);
         setScore(0);
 
