@@ -10,14 +10,20 @@ import {
   import { getApp } from "firebase/app";
   import { getAuth } from "firebase/auth";
   import {firebase} from '../FirebaseConfig'
-  
+
+
+
   export async function saveGame(game) {
     const app = getApp();
     const db = getFirestore(app);
     const auth = getAuth(app);
-    const uid = auth.currentUser.uid;
+    const user = auth.currentUser;
+    const uid = user.uid;
+    const email = user.email;
   
     game.userId = uid;
+    game.email = email;
+
   
     await addDoc(collection(db, "quizAttempt"), game);
   }

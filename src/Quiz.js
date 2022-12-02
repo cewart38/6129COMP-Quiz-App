@@ -103,7 +103,7 @@ const Quiz = ({navigation}) => {
                     color: COLORS.black,
                     fontSize: 35
                 }}>What is This?</Text>
-                {Speech.speak('What is this Image?')}
+                {Speech.speak('What is This?')}
                 {/* Image */}
                 <Image style={styles.logo} source={allQuestions[currentQuestionIndex]?.image} />
             </View>

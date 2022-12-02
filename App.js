@@ -123,6 +123,12 @@ const Stack = createStackNavigator();
           headerTitle: () => <Header name = "Dashboard" />
         }}
         /> 
+            <Stack.Screen name="admindashboard" 
+    component={AdminDashboard}
+    options= {{
+      headerTitle: () => <Header name = "Admin Dashboard" />
+    }}
+    /> 
         <Stack.Screen name="quiz" 
         component={Quiz}
         options= {{
@@ -138,7 +144,7 @@ const Stack = createStackNavigator();
         <Stack.Screen name="viewstudentscores" 
         component={ViewStudentScores}
         options= {{
-          headerTitle: () => <Header name = "View Scores" />
+          headerTitle: () => <Header name = "View Student Scores" />
         }}
         /> 
     <Stack.Screen name="viewScores"

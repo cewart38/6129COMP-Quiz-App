@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     //marginTop: 100,
-    backgroundColor: 'yellow',
+    backgroundColor: 'yellow', 
 },
 
   innerContainer: {
