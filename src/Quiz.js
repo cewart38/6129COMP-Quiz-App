@@ -7,6 +7,7 @@ import { firebase, addDoc } from '../FirebaseConfig'
 import moment from 'moment/moment';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { getQuestions } from './QuizDataTest';
+import * as Speech from 'expo-speech';
 
 const Quiz = ({navigation}) => {
 
@@ -42,6 +43,7 @@ const Quiz = ({navigation}) => {
             setCorrectOption(null);
             setIsOptionsDisabled(false);
             setShowNextButton(false);
+            Speech.stop();
         }
         Animated.timing(progress, {
             toValue: currentQuestionIndex+1,
@@ -68,11 +70,6 @@ const Quiz = ({navigation}) => {
             duration: 1000,
             useNativeDriver: false
         }).start();
-    }
-
-    function functionCombined(){
-        restartQuiz();
-        saveScore();
     }
 
     const saveScore = (score) => {
@@ -106,7 +103,7 @@ const Quiz = ({navigation}) => {
                     color: COLORS.black,
                     fontSize: 35
                 }}>What is This?</Text>
-
+                {Speech.speak('What is this Image?')}
                 {/* Image */}
                 <Image style={styles.logo} source={allQuestions[currentQuestionIndex]?.image} />
             </View>
@@ -140,8 +137,7 @@ const Quiz = ({navigation}) => {
                             marginVertical: 3
                         }}
                         >
-                            <Text style={{fontSize: 20, color: COLORS.black}}>{option}</Text>
-
+                            <Text style={{fontSize: 20, color: COLORS.black}}>{option}{Speech.speak(option)}</Text>
                             {/* Show Check Or Cross Icon based on correct answer*/}
                             {
                                 option==correctOption ? (

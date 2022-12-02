@@ -27,8 +27,6 @@ const ViewScores = () => {
   const auth = getAuth(app);
   const uid = auth.currentUser.uid;
 
-  console.log('User', uid)
-
   useEffect(() => {
       let gamesFromDb = [];
       getSavedGames(uid).then((res) => {
@@ -46,7 +44,7 @@ const ViewScores = () => {
     <FlatList
       data={games}
       renderItem={({ item }) => (
-        <View style={{ height: 100, flex: 1, alignItems: 'center', justifyContent: 'center', }}>
+        <View style={{ height: 100, flex: 1, alignItems: "stretch", justifyContent: 'center', }}>
           <View style={styles.innerContainer}>
           <Text style={styles.scoreText}>Score: {item.score}/20</Text>
           <Text style={styles.dateText}>{item.date}</Text>

@@ -12,7 +12,7 @@ import Quiz from "./src/Quiz";
 import Test from "./src/Test";
 import Header from './components/Header';
 import AdminDashboard from "./src/AdminDashboard";
-import AddObject from "./src/AddObject";
+// import AddObject from "./src/AddObject";
 import ViewStudentScores from "./src/ViewStudentScores";
 import ViewScores from "./src/ViewScores";
 
@@ -129,12 +129,12 @@ const Stack = createStackNavigator();
           headerTitle: () => <Header name = "Quiz" />
         }}
         /> 
-        <Stack.Screen name="addobject" 
+        {/* <Stack.Screen name="addobject" 
         component={AddObject}
         options= {{
           headerTitle: () => <Header name = "Add Object" />
         }}
-         /> 
+         />  */}
         <Stack.Screen name="viewstudentscores" 
         component={ViewStudentScores}
         options= {{

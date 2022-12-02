@@ -5,7 +5,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import React, {useState, useEffect} from 'react'
 import {firebase} from '../FirebaseConfig'
 
-import AddObject from './AddObject'
+// import AddObject from './AddObject'
 import ViewStudentScores from './ViewStudentScores'
 
 const AdminDashboard = () => {
