@@ -16,51 +16,7 @@ const Login = ({navigation}) => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('') 
 
-/*    const [emailError, setEmailError] = useState('')
-    const [passwordError, setPasswordError] = useState('')
-
-    // validate error messages
-    const validate = () => {
-        if (!email.includes('@')) {
-            setEmailError('Invalid Email')
-        }
-
-        else if (password.length < 6) {
-            setPasswordError('Password Must Be At Least 6 Characters')
-        }
-
-        else if (email.length === 0 ) {
-            setEmailError('Email Is Required')
-        }
-
-        else if (email.indexOf(' ') >= 0) {
-            setEmailError('Email Cannot Contain Spaces')
-        }
-
-        else if (password.indexOf(' ') >= 0) {
-            setPasswordError('Password Cannot Contain Spaces')
-        }
-        
-        else {
-            setEmailError('');
-            setPasswordError('');
-        }
-    }
-*/    
-
-/*
-    useEffect(() => {
-        (firebase.firestore().collection('users2'))
-        if ("role" === "student") {
-            navigation.navigate('Dashboard')
-        } else {
-            navigation.navigate('AdminDashboard')
-        }
-    })
-*/
     loginUser = async(email, password) => {
-        //const checkIfUserOrAdmin = firebase.firestore().collection('users2')
-        // var getUser2 = await firebase.collection('users2').doc('role').get() 
         try {
             await firebase.auth().signInWithEmailAndPassword(email, password);
             firebase.firestore().collection('users')
@@ -79,26 +35,6 @@ const Login = ({navigation}) => {
         } catch (error) {
                 alert(error.message)
             }
-
-/*            .then((firebase.firestore().collection('users2')).where("role", "==", "student"))
-            if ("role" === "student") {
-                navigation.navigate('dashboard');
-                console.log("User has entered");
-            } else if ("role" === "admin") {
-                navigation.navigate('admindashboard');
-                console.log("Admin has entered");               
-            }*/
-
-/*        
-        checkIfUserOrAdmin.where("role", "==", (user?.role === "student"))
-        if (checkIfUserOrAdmin) {
-        navigation.navigate('dashboard')
-      } else {
-        navigation.navigate('admindashboard')
-      }
-*/      
-
-        // code for role goes here + navigation
     }
 
     return (
@@ -110,26 +46,6 @@ const Login = ({navigation}) => {
 
             <TypeWriter style={styles.typewriter} typing={1}>6129COMP</TypeWriter>
             <TypeWriter style={styles.typewriter} typing={1}>Mobile Quiz Application</TypeWriter>
-
-{/*            <View style={{marginTop:20}}>
-                <TextInput
-                    style={styles.textInput}
-                    placeholder="Email"
-                    onChangeText={(email) => setEmail(email)}
-                    autoCapitalize="none"
-                    icon="mail"
-                    autoCorrect={false}
-                />
-                <TextInput
-                    style={styles.textInput}
-                    placeholder="Password"
-                    onChangeText={(password) => setPassword(password)}
-                    autoCapitalize="none"
-                    autoCorrect={false}
-                    secureTextEntry={true}
-                />                
-            </View>
-*/}
 
             <View style={styles.SectionStyle}>
             <Image
@@ -174,7 +90,7 @@ const Login = ({navigation}) => {
                 <Text style={{fontWeight:'bold', fontSize:16}}>Click Here To Register</Text>
             </TouchableOpacity>      
             </KeyboardAvoidingView>
-                )    
+            )    
 
         }
 

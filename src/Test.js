@@ -3,7 +3,7 @@ import { StyleSheet, View, Text, SafeAreaView, StatusBar, Image, TouchableOpacit
 import { COLORS, SIZES } from './constants';
 import { getQuestions } from './quizData';
 import { firebase } from '../FirebaseConfig'
-import data from './QuizData';
+import data from './quizData';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const Quiz = () => {

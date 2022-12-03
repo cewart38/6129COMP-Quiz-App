@@ -15,13 +15,6 @@ const AdminDashboard = () => {
     // const to handle name of signed in user
     const [name, setName] = useState('')
 
-    // const to handle visibility of form
-    const [showForm, setShowForm] = useState(false);
-
-    const showTheForm = () => {
-        setShowForm(!showForm);
-    }
-
 
     useEffect(() => {
         firebase.firestore().collection('users')
@@ -35,39 +28,6 @@ const AdminDashboard = () => {
         })
     }, [])
     
-
-
-/*
-    const todoRef = firebase.firestore().collection('addDataTest');
-    const [addData, setAddData] = useState('');
-
-    // Add a new field
-    const addField = () => {
-        // check if we have new field data
-        if (addData && addData.length > 0) {
-            // get the timestamp
-            const timestamp = firebase.firestore.FieldValue.serverTimestamp();
-            const data = {
-                name: addData
-            };
-            todoRef
-                .add(data)
-                .then(() => {
-                    // release the new field state
-                    setAddData('');
-                    // release Keyboard
-                    Keyboard.dismiss();
-                })
-                .catch((error) => {
-                    // show an alert in case of error
-                    alert(error);
-                })
-        }
-    }
-*/    
-
-
-
     return (
 
     
@@ -118,11 +78,6 @@ const AdminDashboard = () => {
 
             
         </SafeAreaView>
-    
-
-        
-
-
     )
 }
 

@@ -18,8 +18,6 @@ import ViewScores from "./src/ViewScores";
 
 const Stack = createStackNavigator();
 
- // DashboardPage: {screen: Dashboard,},
- // AdminDashboard: {screen: AdminDashboard,},
 
   function App() {
   const [initializing, setInitializing] = useState(true);
@@ -39,22 +37,6 @@ const Stack = createStackNavigator();
   }, []);
 
   if (initializing) return null;
-
-
-//  const checkIfUserOrAdmin = firebase.firestore().collection('users2')
-
-/*
-  const handleSignIn = () => {
-    if (user) {
-      checkIfUserOrAdmin.where("role", "==", (user?.role === "student"))
-      navigation.navigate('dashboard')
-    } else {
-      navigation.navigate('AdminDashboard')
-    }
-    
-  }
-*/  
-  
 
   if (!user) {
     
@@ -78,42 +60,6 @@ const Stack = createStackNavigator();
     );
   }
 
-
-  function IsAdmin() {
-    return (
-      <Stack.Navigator>
-    <Stack.Screen name="admindashboard" 
-    component={AdminDashboard}
-    options= {{
-      headerTitle: () => <Header name = "Admin Dashboard" />
-    }}
-    /> 
-    </Stack.Navigator>
-    )
-  }
-
-  
-
-  function IsUser() {
-    return (
-    <Stack.Navigator>
-    <Stack.Screen name="dashboard" 
-    component={Dashboard}
-    options= {{
-      headerTitle: () => <Header name = "Dashboard" />
-    }}
-    /> 
-    <Stack.Screen name="quiz"
-    component={Quiz}
-    options= {{
-      headerTitle: () => <Header name = "Quiz" />
-    }}
-        />
-    </Stack.Navigator>
-    )
-  }
-
-   
   return (
 
     <Stack.Navigator>      
@@ -154,62 +100,7 @@ const Stack = createStackNavigator();
     }}
         />
     </Stack.Navigator>
-
- /*       
-                <Stack.Screen name="addObject" 
-        component={AddObject}
-        options= {{
-          headerTitle: () => <Header name = "Add Object" />
-        }}
-        />    
-                <Stack.Screen name="scores" 
-        component={ViewStudentScores}
-        options= {{
-          headerTitle: () => <Header name = "Scores" />
-        }}
-        />                                                   
-    </Stack.Navigator>
-
-    */
-  
-
-
-    /*
-    <NavigationContainer>
-      <Stack.Navigator>
-      <Stack.Screen name="dashboard"
-        //children={props => {Dashboard}} 
-        component={Dashboard}
-        //{() => <Dashboard {...this.props} />}
-        options= {{
-          headerTitle: () => <Header name = "Dashboard" />
-        }}
-        /> 
-      </Stack.Navigator>
-      <Stack.Navigator>
-      <Stack.Screen name="admindashboard" 
-        component={AdminDashboard}
-        options= {{
-          headerTitle: () => <Header name = "Admin Dashboard" />
-        }}
-        /> 
-      </Stack.Navigator>
-    </NavigationContainer>
-      */
-
-
-
-/*<Stack.Navigator initialRouteName="Login">
-  <Stack.Screen name="Login" component={Login} options={{headerShown: false}}/>
-  <Stack.Screen name="Register" component={Registration} options={{headerShown: false}}/>
-  <Stack.Screen name="Dashboard" component={Dashboard} options={{headerShown: false}}/>
-  <Stack.Screen name="AdminDashboard" component={AdminDashboard} options={{headerShown: false}}/>
-</Stack.Navigator>
-
-*/
-
-
-
+    
   ) 
 
 

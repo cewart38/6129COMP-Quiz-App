@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
 import { StyleSheet, View, Text, SafeAreaView, StatusBar, Image, TouchableOpacity, Modal, Animated } from 'react-native'
 import { COLORS, SIZES } from './constants';
-import data, { questions, shuffleArray, shuffledArray } from './QuizData';
+import data, { questions, shuffleArray, shuffledArray } from './quizData';
 import { saveGame } from './saveScore';
 import { firebase, addDoc } from '../FirebaseConfig'
 import moment from 'moment/moment';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import { getQuestions } from './QuizData';
+import { getQuestions } from './quizData';
 import * as Speech from 'expo-speech';
 
 const Quiz = ({navigation}) => {
